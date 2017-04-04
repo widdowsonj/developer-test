@@ -8,6 +8,7 @@ namespace OrangeBricks.Web.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public int Amount { get; set; }
 
         public OfferStatus Status { get; set; }
