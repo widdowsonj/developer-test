@@ -11,6 +11,9 @@ namespace OrangeBricks.Web.Models
         [Required]
         public int Amount { get; set; }
 
+        [Required]
+        public string BuyerUserId { get; set; }
+
         public OfferStatus Status { get; set; }
 
         public DateTime CreatedAt { get; set; }
