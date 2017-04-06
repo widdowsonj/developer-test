@@ -24,7 +24,8 @@ namespace OrangeBricks.Web.Controllers.Property.Builders
             {
                 PropertyId = property.Id,
                 PropertyType = property.PropertyType,
-                StreetName = property.StreetName
+                StreetName = property.StreetName,
+                ViewingAt = DateTime.Now.AddDays(1)
             };
         }
     }
