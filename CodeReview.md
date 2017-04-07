@@ -12,6 +12,6 @@ The domain model could be moved into a separate data access layer project and th
 
 The use of AutoMapper could be considered for mapping the properties of domain models to view models.
 
-There are some unit tests but the coverage could be improved.
+There are some unit tests but the coverage could be improved, although you could argue if it is throw away code it is not needed.
 
 In production there would need to be general error handling, validation and logging implemented.  For security there would need to be anti forgery tokens added to the controller post actions to prevent cross site request forgeries.  The properties to bind to would also need adding to protect from overposting attacks.
