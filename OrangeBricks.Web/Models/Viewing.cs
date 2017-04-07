@@ -11,6 +11,7 @@ namespace OrangeBricks.Web.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public DateTime ViewingAt { get; set; }
 
         public DateTime CreatedAt { get; set; }

@@ -10,11 +10,16 @@
 
 @using (Html.BeginForm("BookViewing", "Property", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
     <div class="form-group">
         @Html.LabelFor(m => m.ViewingAt, "View At", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.Hidden("PropertyId", Model.PropertyId)
             @Html.TextBoxFor(m => m.ViewingAt, new {@class = "form-control datepicker" })
+            @Html.ValidationMessageFor(m => m.ViewingAt, "", new { @class = "text-danger" })
         </div>
     </div>
     <script type="text/javascript">

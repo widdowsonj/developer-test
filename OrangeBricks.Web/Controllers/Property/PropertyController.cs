@@ -7,6 +7,7 @@ using OrangeBricks.Web.Controllers.Property.Builders;
 using OrangeBricks.Web.Controllers.Property.Commands;
 using OrangeBricks.Web.Controllers.Property.ViewModels;
 using OrangeBricks.Web.Models;
+using System;
 
 namespace OrangeBricks.Web.Controllers.Property
 {
@@ -104,15 +105,29 @@ namespace OrangeBricks.Web.Controllers.Property
 
         [HttpPost]
         [OrangeBricksAuthorize(Roles = "Buyer")]
+        [ValidateAntiForgeryToken]
         public ActionResult BookViewing(BookViewingCommand command)
         {
-            var handler = new BookViewingCommandHandler(_context);
+            try
+            {
+                var handler = new BookViewingCommandHandler(_context);
 
-            command.BuyerUserId = User.Identity.GetUserId();
+                command.BuyerUserId = User.Identity.GetUserId();
+            
+                handler.Handle(command);
 
-            handler.Handle(command);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                // TODO: Log the error
 
-            return RedirectToAction("Index");
+                ModelState.AddModelError(string.Empty, "We were unable to book your viewing, please try again");
+
+                var builder = new BookViewingViewModelBuilder(_context);
+                var viewModel = builder.Build(command.PropertyId);
+                return View(viewModel);
+            }
         }
     }
 }
